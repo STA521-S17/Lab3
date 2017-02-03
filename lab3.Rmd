@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo =TRUE)
 ```
 
 ## Topics
@@ -17,18 +17,17 @@ knitr::opts_chunk$set(echo = FALSE)
 * wercker
 * termplot
 * more on interactions
-* residuals in GLMS
 
 
 ##  wercker 
 
-* Check your builds
+* Check your builds to see where things are breaking
 * If there are missing packages let us know so that we may update the `werker.yml`
 *  Should have passing badge at time of submission
 
 ## Termplot Example
 
-```{r}
+```{r simdata, echo=T}
 n = 100
 logx1 = rnorm(n)
 x1 = exp(logx1)
@@ -40,20 +39,26 @@ simdat = data.frame(X1=x1, X2 = x2, Y=exp(logy))
 ## Termplot output
 ```{r}
 termplot(lm(Y ~ X1 + X2, data=simdat), terms = "X1",
-         partial.resid = T, se=T, rug=T, smooth = panel.smooth)
+         partial.resid = T, se=T, rug=T,
+         smooth = panel.smooth)
+
 ```
+
 ## Termplot output
 ```{r}
 termplot(lm(Y ~ X1 + X2, data=simdat), terms = "X2",
-         partial.resid = T, se=T, rug=T, smooth = panel.smooth)
+         partial.resid = T, se=T, rug=T, 
+         smooth = panel.smooth)
 ```
 
 ##  termplot with transformation of Y and X1
 
 ```{r}
-termplot(lm(log(Y) ~ log(X1) + X2, data=simdat), terms = "log(X1)",
-         partial.resid = T, se=T, rug=T, smooth = panel.smooth)
+termplot(lm(log(Y) ~ log(X1) + X2, data=simdat),
+         terms = "log(X1)", partial.resid = T, se=T, rug=T, 
+         smooth = panel.smooth)
 ```
+
 ##  termplot with transformation of Y and X1
 
 ```{r}
@@ -116,14 +121,19 @@ $$\hat{\beta}_1 (\log(X1) - \bar{\log(X1)})  + e$$
 
 ##  All possible interactions
 
+
 ```{r}
 lm(log(Y) ~ (log(X1) + sqrt(X2))^2, data=simdat)
 ```
 
+Equivalent to model formula `log(X1) + sqrt(X2) + log(X1):sqrt(X2)`
 
 ## Selective proposal Interactions
 
-Only add interactions if main effects are "significant"
+* add interactions if main effects are "significant"
+
+* think about possible reason for interaction (science)
+
 
 
 
