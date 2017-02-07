@@ -4,9 +4,8 @@ Topics:
 
 * wercker demo
 
-* What is termplot ?
+* more on termplot ?
 
-* residuals in GLMs
+* See lab3.pdf for pdf version of slides or lab3.Rmd for code
 
-* Discussion about interactions & modelling
 
